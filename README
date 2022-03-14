@@ -1,0 +1,14 @@
+security check
+==============
+
+simple tool to automatically check system changes over time
+
+==============
+
+Environment vairables:
+  - TG_CHAT_ID       target telegram chat id to retrieve messages
+  - TG_BOT_TOKEN     bot token
+
+Requirements:
+  - https://github.com/babashka/babashka
+  - https://formulae.brew.sh/formula/diffutils
