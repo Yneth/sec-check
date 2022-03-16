@@ -18,7 +18,7 @@
 
 (defn notify-telegram [target-name data]
   (let [max-lines     50
-        prefixed-data (str "#security \n" (clojure.string/upper-case target-name) "\n" data)]
+        prefixed-data (str "#security \n" (str/upper-case target-name) "\n" data)]
     (->> (str/split-lines prefixed-data)
          (partition-all max-lines)
          (map (partial str/join \newline))
@@ -27,7 +27,9 @@
              (curl/post
                (format "https://api.telegram.org/bot%s/sendMessage" tg-bot-token)
                {:headers {"Content-Type" "application/json"}
-                :body    (json/encode {:chat_id tg-chat-id :text message-string})}))))))
+                :body    (json/encode {:chat_id tg-chat-id 
+                                       :text message-string
+                                       :disable_notification true})}))))))
 
 (defn run-which-cmd [cmd-lookup]
   (let [resp (shell/sh "which" cmd-lookup)]
